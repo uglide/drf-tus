@@ -57,7 +57,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'Django>=1.8,<=3.2',
+        'Django>=1.8,<=3.3',
         'djangorestframework>=3.5.4',
         'jsonfield>=2.0.0',
         'django-fsm==2.7.1',
