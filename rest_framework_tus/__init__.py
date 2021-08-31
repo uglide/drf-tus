@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, print_function
-default_app_config = 'rest_framework_tus.apps.RestFrameworkTusConfig'
 
-__version__ = '1.21.2.r1'
+__version__ = '1.21.2.post2'
 
 tus_api_version = '1.0.0'
 tus_api_version_supported = ['1.0.0']
