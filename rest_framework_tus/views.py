@@ -175,6 +175,7 @@ class TusCreateMixin(mixins.CreateModelMixin):
         """
         return filename
 
+
 class TusPatchMixin(mixins.UpdateModelMixin):
     def get_chunk(self, request):
         if TusUploadStreamParser in self.parser_classes:
@@ -237,7 +238,7 @@ class TusPatchMixin(mixins.UpdateModelMixin):
                 return Response('Unsupported Checksum Algorithm: {}.'.format(
                     upload_checksum[0]), status=status.HTTP_400_BAD_REQUEST)
             elif not checksum_matches(
-                upload_checksum[0], upload_checksum[1], chunk_bytes):
+                    upload_checksum[0], upload_checksum[1], chunk_bytes):
                 return Response('Checksum Mismatch.', status=460)
 
         # Run chunk validator
@@ -276,6 +277,7 @@ class TusPatchMixin(mixins.UpdateModelMixin):
 
     def _is_valid_content_type(self, request):
         return request.META['CONTENT_TYPE'] == TusUploadStreamParser.media_type
+
 
 class TusTerminateMixin(mixins.DestroyModelMixin):
     def destroy(self, request, *args, **kwargs):
