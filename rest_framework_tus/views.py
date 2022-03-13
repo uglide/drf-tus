@@ -110,11 +110,11 @@ class TusCreateMixin(mixins.CreateModelMixin):
         filename = self.validate_filename(filename)
 
         # Retrieve serializer
-        serializer = self.get_serializer(data={
-            'upload_length': upload_length,
-            'upload_metadata': json.dumps(upload_metadata),
-            'filename': filename,
-        })
+        serializer = self.get_serializer(data=self.get_serializer_data(
+            request, metadata=upload_metadata,
+            filename=filename,
+            file_length=upload_length
+        ))
 
         # Validate serializer
         serializer.is_valid(raise_exception=True)
@@ -149,6 +149,13 @@ class TusCreateMixin(mixins.CreateModelMixin):
             return Response(headers=headers, status=status.HTTP_201_CREATED)
 
         return Response(serializer.data, headers=headers, status=status.HTTP_201_CREATED)
+
+    def get_serializer_data(self, request, metadata, file_length, filename):
+        return {
+            'upload_length': file_length,
+            'upload_metadata': json.dumps(metadata),
+            'filename': filename,
+        }
 
     def get_success_headers(self, data):
         try:
