@@ -99,7 +99,7 @@ class TusMiddleware(object):
     def parse_upload_checksum(cls, request):
         upload_checksum_header = cls.get_header(request, 'Upload-Checksum', None)
 
-        if upload_checksum_header is None:
+        if not upload_checksum_header:
             return
 
         upload_checksum = list(upload_checksum_header.split(' '))
@@ -114,7 +114,7 @@ class TusMiddleware(object):
     def parse_upload_metadata(cls, request):
         upload_meta_header = cls.get_header(request, 'Upload-Metadata', None)
 
-        if upload_meta_header is None:
+        if not upload_meta_header:
             return
 
         upload_metadata = {}
